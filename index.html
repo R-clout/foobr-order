@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurants</title>
+    <link href="./src/output.css" rel="stylesheet">
+    <script src="https://unpkg.com/hyperscript.org@0.9.14"></script>
+</head>
+
+<body class="">
+    <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-amber-100">
+        <div class="mx-auto w-full max-w-lg px-4 pb-8 pt-10 sm:px-4 min-h-screen flex flex-col grow bg-white">
+            <header>
+                <a href="/restaurants" class="inline-flex"><img
+                        src="https://res.cloudinary.com/simeon/image/upload/v1707568155/Foob_fuwfqe.svg"
+                        alt="Foobr Logo"></a>
+            </header>
+            <main class="p-2 h-full flex flex-col grow mb-3">
+
+                <h1 class="font-neue font-medium text-[1.25rem]">Select restaurant of your choice</h1>
+                <nav class="my-5">
+                    <ul class="flex items-center gap-2 overflow-auto font-neue font-normal text-[0.75rem]">
+                        <li class="bg-navbg h-fit rounded-[0.5rem] p-1 text-white w-fit">Food</li>
+                        <li class="text-grey500 bg-ullistbg p-1 rounded-sm">Pastries</li>
+                        <li class="text-grey500 bg-ullistbg p-1 rounded-sm">Swallow</li>
+                        <li class="text-grey500 bg-ullistbg p-1 rounded-sm">Hot Deals</li>
+                        <li class="text-grey500 bg-ullistbg p-1 rounded-sm">Discount</li>
+                        <li class="text-grey500 bg-ullistbg p-1 rounded-sm">Promo</li>
+                    </ul>
+                </nav>
+                <input type="text" placeholder="Search for Restaurant"
+                    class="w-full p-2 rounded-[0.4rem] bg-searchbg my-5" _="on keyup 
+                    if the event's key is 'Escape'
+                    set my value to ' '
+                    trigger keyup
+                    else 
+                    show <div/> in #store when its textContent contains my value" />
+                <div class="grid grid-cols-2 gap-3 py-3  " id="store">
+                    <div>
+                        <a href="./order.html">
+                            <img src="https://res.cloudinary.com/simeon/image/upload/f_auto,q_auto/v1718151820/foobr/alata_milk_honey.jpg"
+                                alt="a pot of food" loading="lazy" class="my-3" />
+                            <h2 class="font-medium text-grey300 font-sfpro text-[0.8rem]">Brent food Plaza</h2>
+                            <p class="text-[0.6rem] font-neue text-grey500">tanke, ogbomosho</p>
+                        </a>
+                    </div>
+                    <div id="store">
+                        <a href="./order.html">
+                            <img src="https://res.cloudinary.com/simeon/image/upload/f_auto,q_auto/v1718151820/foobr/alata_milk_honey.jpg"
+                                alt="a pot of food" loading="lazy" class="my-3" />
+                            <h2 class="font-medium text-grey300 font-sfpro text-[0.8rem]">Item 7</h2>
+                            <p class="text-[0.6rem] font-neue text-grey500">general, ogbomosho</p>
+                        </a>
+                    </div>
+                    <div id="store">
+                        <a href="./order.html">
+                            <img src="https://res.cloudinary.com/simeon/image/upload/f_auto,q_auto/v1718151820/foobr/alata_milk_honey.jpg"
+                                alt="a pot of food" loading="lazy" class="my-3" />
+                            <h2 class="font-medium text-grey300 font-sfpro text-[0.8rem]">Alata Milk and Honey</h2>
+                            <p class="text-[0.6rem] font-neue text-grey500">Under G area, ogbomosho</p>
+                        </a>
+                    </div>
+                    <div id="store">
+                        <a href="./order.html">
+                            <img src="https://res.cloudinary.com/simeon/image/upload/f_auto,q_auto/v1718151820/foobr/alata_milk_honey.jpg"
+                                alt="a pot of food" loading="lazy" class="my-3" />
+                            <h2 class="font-medium text-grey300 font-sfpro text-[0.8rem]">Alice's place</h2>
+                            <p class="text-[0.6rem] font-neue text-grey500">Stadium road, ogbomosho</p>
+                        </a>
+                    </div>
+                    <div id="store">
+                        <a href="./order.html">
+                            <img src="https://res.cloudinary.com/simeon/image/upload/f_auto,q_auto/v1718151820/foobr/alata_milk_honey.jpg"
+                                alt="a pot of food" loading="lazy" class="my-3" />
+                            <h2 class="font-medium text-grey300 font-sfpro text-[0.8rem]">Ally's Grill and Kitchen</h2>
+                            <p class="text-[0.6rem] font-neue text-grey500">Adenike, ogbomosho</p>
+                        </a>
+                    </div>
+                    <div id="store">
+                        <a href="./order.html">
+                            <img src="https://res.cloudinary.com/simeon/image/upload/f_auto,q_auto/v1718151820/foobr/alata_milk_honey.jpg"
+                                alt="a pot of food" loading="lazy" class="my-3" />
+                            <h2 class="font-medium text-grey300 font-sfpro text-[0.8rem]">August Brothers</h2>
+                            <p class="text-[0.6rem] font-neue text-grey500">New waso Ultra Mordern Market, Lautech Road,
+                                ogbomosho</p>
+                        </a>
+                    </div>
+                    <div id="store">
+                        <a href="./order.html">
+                            <img src="https://res.cloudinary.com/simeon/image/upload/f_auto,q_auto/v1718151820/foobr/alata_milk_honey.jpg"
+                                alt="a pot of food" loading="lazy" class="my-3" />
+                            <h2 class="font-medium text-grey300 font-sfpro text-[0.8rem]">Bangees Cafe</h2>
+                            <p class="text-[0.6rem] font-neue text-grey500">Under G area, ogbomosho</p>
+                        </a>
+                    </div>
+                    <div id="store">
+                        <a href="./order.html">
+                            <img src="https://res.cloudinary.com/simeon/image/upload/f_auto,q_auto/v1718151820/foobr/alata_milk_honey.jpg"
+                                alt="a pot of food" loading="lazy" class="my-3" />
+                            <h2 class="font-medium text-grey300 font-sfpro text-[0.8rem]">BiteMore</h2>
+                            <p class="text-[0.6rem] font-neue text-grey500">Takie, ogbomosho</p>
+                        </a>
+                    </div>
+                    <div id="store">
+                        <a href="./order.html">
+                            <img src="https://res.cloudinary.com/simeon/image/upload/f_auto,q_auto/v1718151820/foobr/alata_milk_honey.jpg"
+                                alt="a pot of food" loading="lazy" class="my-3" />
+                            <h2 class="font-medium text-grey300 font-sfpro text-[0.8rem]">Chicken Republic Ogbomosho
+                            </h2>
+                            <p class="text-[0.6rem] font-neue text-grey500">Takie, ogbomosho</p>
+                        </a>
+                    </div>
+                    <div id="store">
+                        <a href="./order.html">
+                            <img src="https://res.cloudinary.com/simeon/image/upload/f_auto,q_auto/v1718151820/foobr/alata_milk_honey.jpg"
+                                alt="a pot of food" loading="lazy" class="my-3" />
+                            <h2 class="font-medium text-grey300 font-sfpro text-[0.8rem]">Chicken Way</h2>
+                            <p class="text-[0.6rem] font-neue text-grey500">Orita Naira, ogbomosho</p>
+                        </a>
+                    </div>
+                    <div id="store">
+                        <a href="./order.html">
+                            <img src="https://res.cloudinary.com/simeon/image/upload/f_auto,q_auto/v1718151820/foobr/alata_milk_honey.jpg"
+                                alt="a pot of food" loading="lazy" class="my-3" />
+                            <h2 class="font-medium text-grey300 font-sfpro text-[0.8rem]">Danjuma Isale General</h2>
+                            <p class="text-[0.6rem] font-neue text-grey500">Isale General, ogbomosho</p>
+                        </a>
+                    </div>
+                    <div id="store">
+                        <a href="./order.html">
+                            <img src="https://res.cloudinary.com/simeon/image/upload/f_auto,q_auto/v1718151820/foobr/alata_milk_honey.jpg"
+                                alt="a pot of food" loading="lazy" class="my-3" />
+                            <h2 class="font-medium text-grey300 font-sfpro text-[0.8rem]">Danjuma Under G</h2>
+                            <p class="text-[0.6rem] font-neue text-grey500">Under G area, Ogbomosho</p>
+                        </a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./src/output.css" rel="stylesheet">
+    <script src="https://unpkg.com/hyperscript.org@0.9.14"></script>
+    <title>Order page</title>
+</head>
+
+<body>
+    <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-amber-100">
+        <div class="mx-auto relative  w-full max-w-lg px-4 pb-8 pt-10 sm:px-4 min-h-screen flex flex-col grow bg-white">
+            <header class="flex items-center flex-row justify-between">
+                <a href="/restaurants" class="inline-flex"><img
+                        src="https://res.cloudinary.com/simeon/image/upload/v1707568155/Foob_fuwfqe.svg"
+                        alt="Foobr Logo"></a>
+                <div class=" relative p-4 rounded-[0.4rem]" _="on click 
+                toggle .hidden on #cart end">
+                    <img src="./assets/icons/shopping-cart.svg" alt="shopping cart icon" loading="lazy" />
+                    <p class="absolute top-0 right-0 text-black p-1 rounded-[50%]">0</p>
+                </div>
+            </header>
+            <div class="w-[100%] p-10 h-screen absolute right-0 top-0 z-10 bg-amber-900 text-white hidden" id="cart">
+                <div class="flex gap-10 items-center">
+                    <img src="./assets/icons/arrow-left.svg" alt="back-button"
+                        _="on click toggle .hidden on #cart end" />
+                    <div class="text-[2rem]">CheckOut</div>
+                </div>
+
+                <h2 class="text-[1.2rem] my-6">Order Summary</h2>
+                <div id="order-details">
+                    <div class="flex my-4 p-4 rounded-lg justify-between items-center bg-amber-950">
+                        <div class="flex items-center gap-2">
+                            <div class="">
+                                <img src="./assets/img/download.png" alt="takeaway" class="w-20 rounded-[50%]" />
+                            </div>
+                            <div>
+                                <p>Take Away</p>
+                                <p>2x</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center self-end  gap-10">
+                            <p class="text-[1.11rem]">#600.00</p>
+                            <img src="./assets/icons/x (1).svg" alt="cancel" id="cancel-button" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="flex justify-between items-end">
+                    <p>Total</p>
+                    <p>#600</p>
+                </div>
+            </div>
+            <main class="p-2 h-full flex flex-col grow mb-3">
+                <div class="flex gap-3 items-center font-medium font-neue text-[1.3rem] text-grey900">
+                    <img src="./assets/icons/arrow-left.svg" alt="back button" loading="lazy" onclick="history.back()"/>
+                    <h1>Brent food plaza</h1>
+                </div>
+                <p class="text-grey700 font-semibold font-neue my-2 ">Kindly select the specifications of your
+                    order</p>
+                <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                    <div class="flex gap-2 items-center">
+                        <img src="./assets/img/download.png" alt="a plate of jollof rice" loading="lazy"
+                            class="w-[3rem] h-[3rem] rounded-[50%]" />
+                        <div class="flex flex-col gap-1">
+                            <p class="text-grey700 font-medium text-[0.8rem] font-neue">Take Away</p>
+                            <p class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                &#x20A6;
+                                300.00<span class="font-light text-[0.7rem] text-grey400 ">per
+                                    plate</span></p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                            <button class="text-grey200 "><img src="./assets/icons/minus.svg" alt="minus button"
+                                    loading="lazy" _="on click call decrement(next <p/>)" /></button>
+                            <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                            <button class="text-grey500"><img src="./assets/icons/plus.svg" alt="plus button"
+                                    _="on click call increment(previous <p/>)"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center my-3">
+                        <p class="font-neue text-[0.9rem] text-grey600 font-nor=mal">Main meal</p>
+                        <img src="./assets/icons/dropdown.svg" _="on click 
+                            if my @src is './assets/icons/dropdown.svg'
+                            set my @src to './assets/icons/arrow-down.svg'
+                            toggle .hidden on next <div/>
+                            else 
+                            set my @src to './assets/icons/dropdown.svg'
+                            toggle .hidden on next <div/>
+                            end" />
+                    </div>
+
+                    <div class="hidden" id="food-menu">
+                        <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="./assets/img/download.png" alt="a plate of jollof rice" loading="lazy"
+                                    class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                <div class="flex flex-col gap-1">
+                                    <p class="text-grey700 font-medium text-[0.8rem] font-neue">Jollof rice</p>
+                                    <p
+                                        class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                        &#x20A6;
+                                        300.00<span class="font-light text-[0.7rem] text-grey400 ">per
+                                            spoon</span></p>
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                    <button class="text-grey200 "><img src="./assets/icons/minus.svg" alt="minus button"
+                                            loading="lazy" _="on click
+                                            call decrement(next <p/>)" /></button>
+                                    <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                    <button class="text-grey500"><img src="./assets/icons/plus.svg" alt="plus button"
+                                            loading="lazy" _="on click 
+                                           call increment(previous <p/>)"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="./assets/img/download.png" alt="a plate of white rice" loading="lazy"
+                                    class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                <div class="flex flex-col gap-1">
+                                    <p class="text-grey700 font-medium text-[0.8rem] font-neue">White rice</p>
+                                    <p
+                                        class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                        &#x20A6;
+                                        300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                            spoon</span></p>
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                    <button class="text-grey200 "><img src="./assets/icons/minus.svg" alt="minus button"
+                                            loading="lazy" _="on click call decrement(next <p/>)" /></button>
+                                    <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                    <button class="text-grey500"><img src="./assets/icons/plus.svg" alt="plus button"
+                                            _="on click call increment(previous <p/>)" /></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="./assets/img/download.png" alt="a plate of jollof rice" loading="lazy"
+                                    class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                <div class="flex flex-col gap-1">
+                                    <p class="text-grey700 font-medium text-[0.8rem] font-neue">Fried rice</p>
+                                    <p
+                                        class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                        &#x20A6;
+                                        300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                            spoon</span></p>
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                    <button class="text-grey200 "><img src="./assets/icons/minus.svg" alt="minus button"
+                                            loading="lazy" _="on click call decrement(next <p/>)" /></button>
+                                    <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                    <button class="text-grey500"><img src="./assets/icons/plus.svg" alt="plus button"
+                                            _="on click call increment(previous <p/>)" /></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="./assets/img/download.png" alt="a plate of white rice and beans"
+                                    loading="lazy" class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                <div class="flex flex-col gap-1">
+                                    <p class="text-grey700 font-medium text-[0.8rem] font-neue">White rice and beans</p>
+                                    <p
+                                        class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                        &#x20A6;
+                                        300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                            spoon</span></p>
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                    <button class="text-grey200 "><img src="./assets/icons/minus.svg" alt="minus button"
+                                            loading="lazy" _="on click call decrement(next <p/>)" /></button>
+                                    <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                    <button class="text-grey500"><img src="./assets/icons/plus.svg" alt="plus button"
+                                            _="on click call increment(previous <p/>)" /></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center my-3">
+                        <p class="font-neue text-[0.9rem] text-grey600 font-nor=mal">Side</p>
+                        <img src="./assets/icons/dropdown.svg" _="on click 
+                            if my @src is './assets/icons/dropdown.svg'
+                            set my @src to './assets/icons/arrow-down.svg'
+                            toggle .hidden on next <div/>
+                            else 
+                            set my @src to './assets/icons/dropdown.svg'
+                            toggle .hidden on next <div/>
+                            end" />
+                    </div>
+                    <div class="hidden">
+                        <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="./assets/img/download.png" alt="a plate of fried plantain" loading="lazy"
+                                    class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                <div class="flex flex-col gap-1">
+                                    <p class="text-grey700 font-medium text-[0.8rem] font-neue">Plantain</p>
+                                    <p
+                                        class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                        &#x20A6;
+                                        50.00<span class="font-light text-[0.7rem] text-grey400">per
+                                            piece</span></p>
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                    <button class="text-grey200 "><img src="./assets/icons/minus.svg" alt="minus button"
+                                            loading="lazy" _="on click call decrement(next <p/>)" /></button>
+                                    <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                    <button class="text-grey500"><img src="./assets/icons/plus.svg" alt="plus button"
+                                            _="on click call increment(previous <p/>)" /></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center my-3">
+                            <p class="font-neue text-[0.9rem] text-grey600 font-nor=mal">Protein</p>
+                            <img src="./assets/icons/dropdown.svg" _="on click 
+                            if my @src is './assets/icons/dropdown.svg'
+                            set my @src to './assets/icons/arrow-down.svg'
+                            toggle .hidden on next <div/>
+                            else 
+                            set my @src to './assets/icons/dropdown.svg'
+                            toggle .hidden on next <div/>
+                            end" />
+                        </div>
+
+                        <div class="hidden">
+
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a plate of beef" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Cow meat</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a plate of Beef" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Goat meat</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a plate of beef" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Assorted meat</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a plate of Fish" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Titus Fish</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a plate of Fish" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Croaker Fish</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call increment(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a plate of fish" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Panla Fish</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a plate of smoked chicken" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Chicken</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a plate of jollof rice" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Turkey</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center my-3">
+                            <p class="font-neue text-[0.9rem] text-grey600 font-nor=mal">Swallow</p>
+                            <img src="./assets/icons/dropdown.svg" _="on click 
+                            if my @src is './assets/icons/dropdown.svg'
+                            set my @src to './assets/icons/arrow-down.svg'
+                            toggle .hidden on next <div/>
+                            else 
+                            set my @src to './assets/icons/dropdown.svg'
+                            toggle .hidden on next <div/>
+                            end" />
+                        </div>
+                        <div class="hidden">
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="wraps of eba" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Eba</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="wraps of amala" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Amala</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="wraps of semo" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Semo</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="wraps of fufu" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Fufu</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center my-3">
+                            <p class="font-neue text-[0.9rem] text-grey600 font-nor=mal">Soup</p>
+                            <img src="./assets/icons/dropdown.svg" _="on click 
+                            if my @src is './assets/icons/dropdown.svg'
+                            set my @src to './assets/icons/arrow-down.svg'
+                            toggle .hidden on next <div/>
+                            else 
+                            set my @src to './assets/icons/dropdown.svg'
+                            toggle .hidden on next <div/>
+                            end" />
+                        </div>
+                        <div class="hidden">
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="Ewedu" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Ewedu</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                spoon</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="Gbegiri soup" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Gbegiri</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                spoon</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="Egusi soup" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Egusi</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                spoon</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a pot of efo" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Efo</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                spoon</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center my-3">
+                            <p class="font-neue text-[0.9rem] text-grey600 font-nor=mal">Pastries</p>
+                            <img src="./assets/icons/dropdown.svg" _="on click 
+                            if my @src is './assets/icons/dropdown.svg'
+                            set my @src to './assets/icons/arrow-down.svg'
+                            toggle .hidden on next <div/>
+                            else 
+                            set my @src to './assets/icons/dropdown.svg'
+                            toggle .hidden on next <div/>
+                            end" />
+                        </div>
+                        <div class="hidden">
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a picture of hot snacks" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Egg roll</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a picture of hot snacks" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Sausage</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a picture of snacks" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Meat pie</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a pictures of snacks" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Chicken pie</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center my-3">
+                            <p class="font-neue text-[0.9rem] text-grey600 font-nor=mal">Drinks</p>
+                            <img src="./assets/icons/dropdown.svg" _="on click 
+                            if my @src is './assets/icons/dropdown.svg'
+                            set my @src to './assets/icons/arrow-down.svg'
+                            toggle .hidden on next <div/>
+                            else 
+                            set my @src to './assets/icons/dropdown.svg'
+                            toggle .hidden on next <div/>
+                            end" />
+                        </div>
+                        <div class="hidden">
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a bottle of water" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Bottle water</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a picture of hot snacks" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Pepsi</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="./assets/img/download.png" alt="a picture of snacks" loading="lazy"
+                                        class="w-[3rem] h-[3rem] rounded-[50%]" />
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-grey700 font-medium text-[0.8rem] font-neue">Monster</p>
+                                        <p
+                                            class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
+                                            &#x20A6;
+                                            300.00<span class="font-light text-[0.7rem] text-grey400">per
+                                                piece</span></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
+                                        <button class="text-grey200 "><img src="./assets/icons/minus.svg"
+                                                alt="minus button" loading="lazy"
+                                                _="on click call decrement(next <p/>)" /></button>
+                                        <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                        <button class="text-grey500"><img src="./assets/icons/plus.svg"
+                                                alt="plus button" _="on click call increment(previous <p/>)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script type="text/hyperscript">
+        def decrement(this)
+        set counter to parseInt(innerText of this)
+        if counter > 0
+        decrement counter 
+        then put counter into this
+        else
+        log false
+        end
+
+        def increment(this)
+        set counter to parseInt(innerText of this)
+        increment counter then 
+        put counter into this
+    </script>
+</body>
+
+</html>
