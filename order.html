@@ -18,56 +18,27 @@
                         alt="Foobr Logo"></a>
                 <div class=" relative p-4 rounded-[0.4rem]" _="on click 
                 toggle .hidden on #cart end">
-                    <img src="./assets/icons/shopping-cart.svg" alt="shopping cart icon" loading="lazy" />
-                    <p class="absolute top-0 right-0 text-black p-1 rounded-[50%]">0</p>
+                    <a href="/cart.html">
+                        <img src="./assets/icons/shopping-cart.svg" alt="shopping cart icon" loading="lazy" />
+                    </a>
+                    <p class="absolute top-0 right-0 text-black p-1 rounded-[50%]" id="cart-amount">0</p>
                 </div>
             </header>
-            <div class="w-[100%] p-10 h-screen absolute right-0 top-0 z-10 bg-amber-900 text-white hidden" id="cart">
-                <div class="flex gap-10 items-center">
-                    <img src="./assets/icons/arrow-left.svg" alt="back-button"
-                        _="on click toggle .hidden on #cart end" />
-                    <div class="text-[2rem]">CheckOut</div>
-                </div>
 
-                <h2 class="text-[1.2rem] my-6">Order Summary</h2>
-                <div id="order-details">
-                    <div class="flex my-4 p-4 rounded-lg justify-between items-center bg-amber-950">
-                        <div class="flex items-center gap-2">
-                            <div class="">
-                                <img src="./assets/img/download.png" alt="takeaway" class="w-20 rounded-[50%]" />
-                            </div>
-                            <div>
-                                <p>Take Away</p>
-                                <p>2x</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center self-end  gap-10">
-                            <p class="text-[1.11rem]">#600.00</p>
-                            <img src="./assets/icons/x (1).svg" alt="cancel" id="cancel-button" />
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="flex justify-between items-end">
-                    <p>Total</p>
-                    <p>#600</p>
-                </div>
-            </div>
             <main class="p-2 h-full flex flex-col grow mb-3">
                 <div class="flex gap-3 items-center font-medium font-neue text-[1.3rem] text-grey900">
-                    <img src="./assets/icons/arrow-left.svg" alt="back button" loading="lazy" onclick="history.back()"/>
+                    <img src="./assets/icons/arrow-left.svg" alt="back button" loading="lazy"
+                        onclick="history.back()" />
                     <h1>Brent food plaza</h1>
                 </div>
                 <p class="text-grey700 font-semibold font-neue my-2 ">Kindly select the specifications of your
                     order</p>
-                <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4">
+                <div class="flex justify-between items-center border border-mealborder p-2 rounded-sm my-4" id="product-id-item1">
                     <div class="flex gap-2 items-center">
                         <img src="./assets/img/download.png" alt="a plate of jollof rice" loading="lazy"
                             class="w-[3rem] h-[3rem] rounded-[50%]" />
                         <div class="flex flex-col gap-1">
-                            <p class="text-grey700 font-medium text-[0.8rem] font-neue">Take Away</p>
+                            <p class="text-grey700 font-medium text-[0.8rem] font-neue" id="product-item1">Take Away</p>
                             <p class="font-neue text-grey800 font-normal text-[0.8rem] flex items-baseline gap-1">
                                 &#x20A6;
                                 300.00<span class="font-light text-[0.7rem] text-grey400 ">per
@@ -77,10 +48,10 @@
                     <div>
                         <div class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
                             <button class="text-grey200 "><img src="./assets/icons/minus.svg" alt="minus button"
-                                    loading="lazy" _="on click call decrement(next <p/>)" /></button>
-                            <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                    loading="lazy" onclick="decrement('item1')" id="item1" /></button>
+                            <p class="font-normal text-grey-700 text-[0.8rem] value" id="food-item1">0</p>
                             <button class="text-grey500"><img src="./assets/icons/plus.svg" alt="plus button"
-                                    _="on click call increment(previous <p/>)"></button>
+                                    onclick="increment('item1')" id="item1"></button>
                         </div>
                     </div>
                 </div>
@@ -116,12 +87,10 @@
                                 <div
                                     class="flex gap-3 border-[#EAEAEA] border px-2 py-1 rounded-md items-center font-neue">
                                     <button class="text-grey200 "><img src="./assets/icons/minus.svg" alt="minus button"
-                                            loading="lazy" _="on click
-                                            call decrement(next <p/>)" /></button>
-                                    <p class="font-normal text-grey-700 text-[0.8rem]">0</p>
+                                            loading="lazy" onclick="decrement('item2')" /></button>
+                                    <p class="font-normal text-grey-700 text-[0.8rem] value" id="food-item2">0</p>
                                     <button class="text-grey500"><img src="./assets/icons/plus.svg" alt="plus button"
-                                            loading="lazy" _="on click 
-                                           call increment(previous <p/>)"></button>
+                                            loading="lazy" onclick="increment('item2')"></button>
                                 </div>
                             </div>
                         </div>
@@ -912,6 +881,7 @@
         increment counter then 
         put counter into this
     </script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
