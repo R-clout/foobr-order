@@ -14,7 +14,10 @@ const shopItemsData = Array.from(productItem).map(product => {
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 
 // Function to update item quantity in UI and recalculate cart
+
 function update(id) {
+    // Always reload basket from localStorage to get latest data
+    basket = JSON.parse(localStorage.getItem("data")) || [];
     let search = basket.find((x) => x.id === id);
     document.getElementById(`food-${id}`).innerHTML = search ? search.item : 0;
     calculation();
@@ -22,8 +25,13 @@ function update(id) {
 }
 
 // Function to calculate total items in cart (cart icon count)
+
 function calculation() {
     let cartIcon = document.getElementById("cart-amount");
+    if (!Array.isArray(basket) || basket.length === 0) {
+        cartIcon.innerHTML = 0;
+        return;
+    }
     const totalItems = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
     cartIcon.innerHTML = totalItems;
 }
@@ -53,64 +61,83 @@ function decrease(id) {
     update(id);
 }
 
+shopItemsData.forEach((shopitem) => {
+    let search = basket.find((x) => x.id === shopitem.id);
+    let searchCheck = search ? search.item : 0;
+    const quantityElement = document.getElementById(`food-${shopitem.id}`);
+    if (quantityElement) {
+        quantityElement.innerHTML = searchCheck;
+    }
+});
+
 // Function to render cart items and total
+
 function generateItem() {
     const cartInfo = document.getElementById("cart-info");
-
-    if (basket.length !== 0) {
-        const mergedCart = basket.map(bask => {
-            let product = shopItemsData.find(item => item.id === bask.id);
-            return {
-                ...product,
-                item: bask.item
-            };
-        });
-
-        cartInfo.innerHTML = mergedCart.map((cartItem) => {
-            let totalPrice = cartItem.price * cartItem.item;
-
-            return `
-                <div class="flex justify-between items-center p-4 bg-amber-400 my-4">
-                    <div class="flex items-center gap-4">
-                        <div>
-                            <img src="${cartItem.image}" class="w-24 rounded-[50%]" />
-                        </div>
-                        <div>
-                            <p class="text-[2rem]">${cartItem.name}</p>
-                            <p class="text-[1.5rem]">${cartItem.item}x</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-[1.5rem] font-bold">₦${totalPrice}</p>
-                    </div>
-                </div>
-            `;
-        }).join("");
-
-        const total = mergedCart
-            .map(item => item.price * item.item)
-            .reduce((a, b) => a + b, 0);
-
-        document.getElementById("total-price").textContent = total;
-
-    } else {
+    if (!Array.isArray(basket) || basket.length === 0) {
         cartInfo.innerHTML = `
             <p class="text-[2rem] text-center my-4">This Cart is empty</p>
         `;
         document.getElementById("total-price").textContent = 0;
+        return;
     }
+    const mergedCart = basket.map(bask => {
+        let product = shopItemsData.find(item => item.id === bask.id);
+        return {
+            ...product,
+            item: bask.item
+        };
+    });
+
+    cartInfo.innerHTML = mergedCart.map((cartItem) => {
+        let totalPrice = cartItem.price * cartItem.item;
+        return `
+            <div class="flex justify-between items-center p-4 bg-amber-400 my-4">
+                <div class="flex items-center gap-4">
+                    <div>
+                        <img src="${cartItem.image}" class="w-24 rounded-[50%]" />
+                    </div>
+                    <div>
+                        <p class="text-[2rem]">${cartItem.name}</p>
+                        <p class="text-[1.5rem]">${cartItem.item}x</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-[1.5rem] font-bold">₦${totalPrice}</p>
+                </div>
+            </div>
+        `;
+    }).join("");
+
+    const total = mergedCart
+        .map(item => item.price * item.item)
+        .reduce((a, b) => a + b, 0);
+
+    document.getElementById("total-price").textContent = total;
 }
 
 // Initial rendering of quantities
-shopItemsData.forEach((shopitem) => {
-    let search = basket.find((x) => x.id === shopitem.id);
-    let searchCheck = search ? search.item : 0;
-    document.getElementById(`food-${shopitem.id}`).innerHTML = searchCheck;
-});
+
 
 // Initial calculation and cart rendering
 calculation();
 generateItem();
 
+document.getElementById("back-button").addEventListener('click', () => {
+    console.log('back button has been clicked');
+    document.getElementById('cart').classList.add("hidden");
+})
 
-{/*  */}
+
+document.getElementById("clearCart").addEventListener('click', () => {
+    localStorage.removeItem("data");
+    basket = [];
+    calculation();
+    generateItem();
+    shopItemsData.forEach((shopitem) => {
+        const quantityElement = document.getElementById(`food-${shopitem.id}`);
+        if (quantityElement) {
+            quantityElement.innerHTML = 0;
+        }
+    });
+})
