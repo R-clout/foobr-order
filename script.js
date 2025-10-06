@@ -1,4 +1,5 @@
 const productItem = document.querySelectorAll(".product-item");
+const proceedButton = document.getElementById("proceed-button");
 
 const shopItemsData = Array.from(productItem).map(product => {
     const id = product.dataset.itemId;
@@ -6,37 +7,27 @@ const shopItemsData = Array.from(productItem).map(product => {
     const priceText = product.querySelector('p.text-grey800')?.textContent?.trim() || '';
     const priceMatch = priceText.match(/([\d.]+)/);
     const price = priceMatch ? parseFloat(priceMatch[1]) : 0;
+    const perElement = product.querySelector('.text-grey400');
+    const perText = perElement.textContent.trim().split(' ').pop();
     const quantity = parseInt(product.querySelector(`#food-${id}`)?.textContent.trim(), 10);
     const image = product.querySelector('img')?.getAttribute('src');
-    return { id, name, price, quantity, image };
+    return { id, name, price, quantity, image, perText};
 });
+
+
+console.log(shopItemsData);
 
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 
-// Function to update item quantity in UI and recalculate cart
+
 
 function update(id) {
-    // Always reload basket from localStorage to get latest data
     basket = JSON.parse(localStorage.getItem("data")) || [];
     let search = basket.find((x) => x.id === id);
     document.getElementById(`food-${id}`).innerHTML = search ? search.item : 0;
-    calculation();
     generateItem();
 }
 
-// Function to calculate total items in cart (cart icon count)
-
-function calculation() {
-    let cartIcon = document.getElementById("cart-amount");
-    if (!Array.isArray(basket) || basket.length === 0) {
-        cartIcon.innerHTML = 0;
-        return;
-    }
-    const totalItems = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
-    cartIcon.innerHTML = totalItems;
-}
-
-// Function to increase item quantity
 function increase(id) {
     let search = basket.find((item) => item.id === id);
     if (search === undefined) {
@@ -51,7 +42,7 @@ function increase(id) {
     update(id);
 }
 
-// Function to decrease item quantity
+
 function decrease(id) {
     let search = basket.find((item) => item.id === id);
     if (!search || search.item === 0) return;
@@ -70,17 +61,18 @@ shopItemsData.forEach((shopitem) => {
     }
 });
 
-// Function to render cart items and total
 
 function generateItem() {
     const cartInfo = document.getElementById("cart-info");
     if (!Array.isArray(basket) || basket.length === 0) {
+        proceedButton.classList.add('hidden')
         cartInfo.innerHTML = `
             <p class="text-[2rem] text-center my-4">This Cart is empty</p>
         `;
         document.getElementById("total-price").textContent = 0;
         return;
     }
+    proceedButton.classList.remove('hidden');
     const mergedCart = basket.map(bask => {
         let product = shopItemsData.find(item => item.id === bask.id);
         return {
@@ -89,21 +81,19 @@ function generateItem() {
         };
     });
 
+
     cartInfo.innerHTML = mergedCart.map((cartItem) => {
         let totalPrice = cartItem.price * cartItem.item;
         return `
-            <div class="flex justify-between items-center p-4 bg-amber-400 my-4">
+            <div class="flex justify-between items-center p-4">
                 <div class="flex items-center gap-4">
                     <div>
-                        <img src="${cartItem.image}" class="w-24 rounded-[50%]" />
-                    </div>
-                    <div>
-                        <p class="text-[2rem]">${cartItem.name}</p>
-                        <p class="text-[1.5rem]">${cartItem.item}x</p>
+                        <p class="text-[1.5rem]">${cartItem.name}</p>
                     </div>
                 </div>
-                <div>
+                <div class="flex items-center gap-2">
                     <p class="text-[1.5rem] font-bold">₦${totalPrice}</p>
+                    <p class="text-[0.9rem]">-${cartItem.item} ${cartItem.perText}</p>
                 </div>
             </div>
         `;
@@ -116,11 +106,8 @@ function generateItem() {
     document.getElementById("total-price").textContent = total;
 }
 
-// Initial rendering of quantities
 
 
-// Initial calculation and cart rendering
-calculation();
 generateItem();
 
 document.getElementById("back-button").addEventListener('click', () => {
@@ -132,7 +119,6 @@ document.getElementById("back-button").addEventListener('click', () => {
 document.getElementById("clearCart").addEventListener('click', () => {
     localStorage.removeItem("data");
     basket = [];
-    calculation();
     generateItem();
     shopItemsData.forEach((shopitem) => {
         const quantityElement = document.getElementById(`food-${shopitem.id}`);
