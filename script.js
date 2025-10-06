@@ -8,40 +8,32 @@ const shopItemsData = Array.from(productItem).map(product => {
     const priceMatch = priceText.match(/([\d.]+)/);
     const price = priceMatch ? parseFloat(priceMatch[1]) : 0;
     const perElement = product.querySelector('.text-grey400');
-    const perText = perElement.textContent.trim().split(' ').pop();
+    const perText = perElement ? perElement.textContent.trim().split(' ').pop() : '';
     const quantity = parseInt(product.querySelector(`#food-${id}`)?.textContent.trim(), 10);
     const image = product.querySelector('img')?.getAttribute('src');
-    return { id, name, price, quantity, image, perText};
+    return { id, name, price, quantity, image, perText };
 });
 
-
-console.log(shopItemsData);
-
 let basket = JSON.parse(localStorage.getItem("data")) || [];
-
-
+let cart = [];
 
 function update(id) {
     basket = JSON.parse(localStorage.getItem("data")) || [];
     let search = basket.find((x) => x.id === id);
     document.getElementById(`food-${id}`).innerHTML = search ? search.item : 0;
-    generateItem();
+    updateProceedButton();
 }
 
 function increase(id) {
     let search = basket.find((item) => item.id === id);
     if (search === undefined) {
-        basket.push({
-            id: id,
-            item: 1
-        });
+        basket.push({ id: id, item: 1 });
     } else {
         search.item += 1;
     }
     localStorage.setItem("data", JSON.stringify(basket));
     update(id);
 }
-
 
 function decrease(id) {
     let search = basket.find((item) => item.id === id);
@@ -61,26 +53,31 @@ shopItemsData.forEach((shopitem) => {
     }
 });
 
-
-function generateItem() {
-    const cartInfo = document.getElementById("cart-info");
+function updateProceedButton() {
     if (!Array.isArray(basket) || basket.length === 0) {
-        proceedButton.classList.add('hidden')
+        proceedButton.style.display = "none";
+    } else {
+        proceedButton.style.display = "block";
+    }
+}
+updateProceedButton();
+
+function renderCart() {
+    const cartInfo = document.getElementById("cart-info");
+    if (!Array.isArray(cart) || cart.length === 0) {
         cartInfo.innerHTML = `
             <p class="text-[2rem] text-center my-4">This Cart is empty</p>
         `;
         document.getElementById("total-price").textContent = 0;
         return;
     }
-    proceedButton.classList.remove('hidden');
-    const mergedCart = basket.map(bask => {
+    const mergedCart = cart.map(bask => {
         let product = shopItemsData.find(item => item.id === bask.id);
         return {
             ...product,
             item: bask.item
         };
     });
-
 
     cartInfo.innerHTML = mergedCart.map((cartItem) => {
         let totalPrice = cartItem.price * cartItem.item;
@@ -106,24 +103,27 @@ function generateItem() {
     document.getElementById("total-price").textContent = total;
 }
 
-
-
-generateItem();
-
 document.getElementById("back-button").addEventListener('click', () => {
-    console.log('back button has been clicked');
     document.getElementById('cart').classList.add("hidden");
-})
-
+});
 
 document.getElementById("clearCart").addEventListener('click', () => {
     localStorage.removeItem("data");
     basket = [];
-    generateItem();
+    updateProceedButton();
     shopItemsData.forEach((shopitem) => {
         const quantityElement = document.getElementById(`food-${shopitem.id}`);
         if (quantityElement) {
             quantityElement.innerHTML = 0;
         }
     });
-})
+    cart = [];
+    renderCart();
+});
+
+proceedButton.addEventListener('click', () => {
+    cart = basket.map(item => ({ ...item }));
+    renderCart();
+    document.getElementById('cart').classList.remove("hidden");
+    console.log('Cart:', cart);
+});
